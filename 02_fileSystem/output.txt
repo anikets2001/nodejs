@@ -1,0 +1,2 @@
+We are writing to a file using writeFileSync method
+This is an appended line.

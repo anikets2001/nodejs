@@ -1,0 +1,2 @@
+This is from async writeFile
+This is an appended line in async way.
