@@ -1,5 +1,5 @@
 {
-  "name": "restApis",
+  "name": "07_expresspractise",
   "version": "1.0.0",
   "description": "",
   "license": "ISC",
@@ -8,10 +8,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "node index.js"
   },
   "dependencies": {
-    "express": "^5.2.1",
-    "nodemon": "^3.1.14"
+    "express": "^5.2.1"
   }
 }

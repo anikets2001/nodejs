@@ -20,16 +20,16 @@ app.use((req,res,next)=> {
     next();
 })
 
+// routes
+app.get('/', (req, res) => {
+    res.send(`Hello, ${req.myName}!`);
+});
+
 // error handling middleware
 app.use((err, req, res, next)=> {
     console.error(err.stack);
     res.status(500).send('Something broke!');
 })
-
-// routes
-app.get('/', (req, res) => {
-    res.send(`Hello, ${req.myName}!`);
-});
 
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
