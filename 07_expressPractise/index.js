@@ -7,8 +7,24 @@ app.use((req, res, next)=> {
     next();
 })
 
+// app.use((req, res, next) => {
+//     const token = req.headers.token;
+
+//     if (token !== "123") {
+//         return res.status(401).send('Unauthorized: Invalid token');
+//     }
+
+//     next();
+// });
+
+app.use((req, res, next) => {
+    req.user = {name: "Aniket"};
+    next();
+})
+
 app.get('/hello', (req, res) => {
-    res.send('Hello, World!');
+    console.log('user:', req.user);
+    res.send('Hello, ' + req.user.name + '!');
 });
 
 // params
