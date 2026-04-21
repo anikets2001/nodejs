@@ -1,14 +1,22 @@
 import express from 'express';
+import path from 'path';
 import urlRoute from './routes/url.js';
 import { connectDB } from './connection.js';
 import URL from './models/url.js';
 import 'dotenv/config';
+import staticRouter from './routes/staticRouter.js';
 
 const app = express()
 const PORT = 8001;
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
 app.use('/url', urlRoute)
+app.use('/', staticRouter);
+
+app.set('view engine', 'ejs');
+app.set("views", path.resolve("./views"));
 
 app.get('/:shortId', async (req, res) => {
     const shortId = req.params.shortId;
@@ -21,6 +29,11 @@ app.get('/:shortId', async (req, res) => {
     res.redirect(entry.redirectUrl);
 })
 
+app.get('/url/test', async (req, res) => {
+    const allUrls = await URL.find({});
+    return res.render("home", {urls: allUrls})
+});
+
 const start = async () => {
     try {
         await connectDB(process.env.MONGO_URI);
@@ -31,7 +44,6 @@ const start = async () => {
         console.log(error);
         process.exit(1);
     }
-
 }
 
 start();
