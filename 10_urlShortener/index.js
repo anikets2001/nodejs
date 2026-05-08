@@ -5,6 +5,7 @@ import { connectDB } from './connection.js';
 import URL from './models/url.js';
 import 'dotenv/config';
 import staticRouter from './routes/staticRouter.js';
+import userRoute from './routes/user.js';
 
 const app = express()
 const PORT = 8001;
@@ -14,6 +15,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use('/url', urlRoute)
 app.use('/', staticRouter);
+app.use('/user', userRoute);
 
 app.set('view engine', 'ejs');
 app.set("views", path.resolve("./views"));
