@@ -6,14 +6,17 @@ import URL from './models/url.js';
 import 'dotenv/config';
 import staticRouter from './routes/staticRouter.js';
 import userRoute from './routes/user.js';
+import cookieParser from 'cookie-parser';
+import { restrictToLoggedInUserOnly } from './middlewares/auth.js';
 
 const app = express()
 const PORT = 8001;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 
-app.use('/url', urlRoute)
+app.use('/url', restrictToLoggedInUserOnly, urlRoute);
 app.use('/', staticRouter);
 app.use('/user', userRoute);
 
